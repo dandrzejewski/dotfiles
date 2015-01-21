@@ -68,4 +68,39 @@ set wildmode=longest,list
 " Enable horizontal scrollbar
 set guioptions+=b
 
+let &titlestring = "[vim(" . expand("%:t") . ")]"
+if &term == "screen"
+  set t_ts=k
+  set t_fs=\
+  auto BufEnter * :set title | let &titlestring = 'v:' . expand('%')
+  auto VimLeave * :set t_ts=k\
+endif
+if &term == "screen" || &term == "xterm"
+  set title
+endif
+
+
+set rtp+=/Users/raguay/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim
+ 
+" These lines setup the environment to show graphics and colors correctly.
+set nocompatible
+set t_Co=256
+ 
+let g:minBufExplForceSyntaxEnable = 1
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
+ 
+if ! has('gui_running')
+   set ttimeoutlen=10
+   augroup FastEscape
+      autocmd!
+      au InsertEnter * set timeoutlen=0
+      au InsertLeave * set timeoutlen=1000
+   augroup END
+endif
+ 
+set laststatus=2 " Always display the statusline in all windows
+set guifont=Inconsolata\ for\ Powerline:h14
+set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 

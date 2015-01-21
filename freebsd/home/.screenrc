@@ -9,3 +9,7 @@ hardstatus string "%{= rf}%w %{= bw} %=%Y-%m-%d %c:%s"
 
 #caption always "%{= bf}%5n  %t (%H) %l%=%Y-%m-%d %c:%s "
 
+
+# Set the title
+shelltitle '] |bash'
+
