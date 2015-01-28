@@ -3,6 +3,11 @@ syntax on
 set guifont=Courier_New:h8
 set showtabline=2
 
+filetype plugin indent on
+
+" Set the leader key to a comma
+let mapleader=','
+
 " Firefox-style tabs
 nmap <C-S-tab> :tabprevious<cr>
 nmap <C-tab> :tabnext<cr>
