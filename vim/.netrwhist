@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_cnt =4
 let g:netrw_dirhist_1='/Users/dandrzejewski/Downloads/pycrypto-2.6/LEGAL'
 let g:netrw_dirhist_2='/Users/dandrzejewski/.vim'
 let g:netrw_dirhist_3='/Users/dandrzejewski/rcfiles/vim/syntax'
+let g:netrw_dirhist_4='/usr/local/etc/squid/squidGuard'
