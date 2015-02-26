@@ -6,7 +6,8 @@
             "~/.vimrc": "vimrc",
             "~/.zshrc": "zshrc",
             "~/.vim": "vim/",
-            "~/.todo.cfg": "todo.cfg"
+            "~/.todo.cfg": "todo.cfg",
+            "~/.config/powerline": "powerline"
         }
     },
     {
