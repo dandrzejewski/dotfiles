@@ -5,8 +5,13 @@ HELPDIR=/usr/local/share/zsh/help
 
 powerline-daemon -q
 
+if [[ -a /usr/local/lib/python2.7/dist-packages/powerline/bindings/zsh/powerline.zsh ]]; then
+	. /usr/local/lib/python2.7/dist-packages/powerline/bindings/zsh/powerline.zsh
+fi
 
-. /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+if [[ -a /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
+	. /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+fi
 
 alias t=todo.sh
 
