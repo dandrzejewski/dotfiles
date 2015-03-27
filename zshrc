@@ -17,6 +17,8 @@ elif [[ -a /usr/local/lib/python2.7/dist-packages/powerline ]]; then
 
 elif [[ -a /usr/local/lib/python2.7/site-packages/powerline/ ]]; then
 	export POWERLINE_LOC="/usr/local/lib/python2.7/site-packages/powerline"
+elif [[ -a /usr/share/powerline ]]; then
+	export POWERLINE_LOC="/usr/share/powerline"
 fi
 
 . $POWERLINE_LOC/bindings/zsh/powerline.zsh
