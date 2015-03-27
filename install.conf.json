@@ -6,12 +6,8 @@
             "~/.vimrc": "vimrc",
             "~/.zshrc": "zshrc",
             "~/.vim": "vim/",
-<<<<<<< HEAD
-            "~/.todo.cfg": "todo.cfg"
-=======
             "~/.todo.cfg": "todo.cfg",
             "~/.config/powerline": "powerline"
->>>>>>> 06b3eca21eba57d64f0f08dcf45afb9974bd8628
         }
     },
     {
