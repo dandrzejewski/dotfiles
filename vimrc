@@ -3,6 +3,8 @@ syntax on
 set guifont=Courier_New:h8
 set showtabline=2
 
+
+
 filetype plugin indent on
 
 " Set the leader key to a comma
@@ -18,7 +20,9 @@ imap <C-t> <ESC>:tabnew<cr>i
 map <C-w> :tabclose<cr>
 
 " The best color scheme ever.
-colorscheme delek
+set background=dark
+colorscheme solarized
+
 
 " Don't back up files
 set nobackup
