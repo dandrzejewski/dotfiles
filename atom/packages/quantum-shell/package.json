@@ -1,0 +1,218 @@
+{
+  "name": "quantum-shell",
+  "main": "./lib/quantum-shell-controller",
+  "version": "0.3.4",
+  "author": {
+    "name": "Seth David Bullock",
+    "email": "sedabull@gmail.com",
+    "url": "http://github.com/sedabull"
+  },
+  "description": "A terminal emulator with full history, alias, and environment support!",
+  "keywords": [
+    "cli",
+    "terminal",
+    "shell",
+    "command line",
+    "history",
+    "alias",
+    "environment",
+    "builtins"
+  ],
+  "bugs": {
+    "url": "http://github.com/sedabull/quantum-shell/issues",
+    "email": "sedabull@gmail.com"
+  },
+  "activationCommands": {
+    "atom-workspace": "quantum-shell:toggle"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sedabull/quantum-shell"
+  },
+  "license": "MIT",
+  "engines": {
+    "atom": ">=0.174.0"
+  },
+  "dependencies": {
+    "split": "^0.3.2",
+    "through2": "^0.6.3",
+    "underscore-plus": "^1.6.6"
+  },
+  "readme": "# Quantum Shell for Github's Atom!\nA command line interface built directly into Atom! This package is largely inspired by (but not a direct fork of) [terminal-panel](http://github.com/thedaniel/terminal-panel). The goal of this project is to provide users with a simple, yet powerful tool, that no self-proclaimed 'Hackable' editor should be without. It will maintain strict compliance to the 1.0.0-pre Atom API for now, and once its official, the 1.x API. Currently, this package should run as expected on Atom >=0.174.0 with any standard Linux machine. It will likely perform well on OS X as well, however, that has not yet been tested. Complete Cross-platform compatibility is an eventual goal as are many other things (see the [CHANGELOG](https://github.com/sedabull/quantum-shell/blob/master/CHANGELOG.md) for details).To get started just search for and download 'quantum-shell' in the Atom package manager and press `ctrl-shift-q` to get started. Happy Hacking!\n## Features\n### Proper `cd` and `pwd` support\nThe initial release of quantum-shell did not allow a user to change directories from wherever the current `process` was running, which is obviously unacceptable. There are now proper `cd` and `pwd` builtin commands so that this will no longer be an issue.\n### Full `history` support just like you're used to in bash\nJust use the `up` and `down` arrow keys when the input field is focused to quickly navigate through your history. Or use the `history` builtin to view a list of your past 100 commands.\n### Full `alias` and `unalias` support\nFor the sake of simplicity of implementation, the syntax is a little different in quantum-shell than other shells. It is:\n```\nalias <key> = <expansion>\n```\n\nThere are a few things to know about this syntax. First, you can only define one alias at a time. Second, the `key` must be a single word, containing absolutely no whitespace. Third, the `=` must have whitespace on either side of it (i.e. not touching anything). And finally, all of the words to the left of the `=` will be concatenated together and seperated by a single `space`. Whenever quantum-shell detects the `key` in an input command, it will be replaced with `expansion`, unless the key is contained within single `''` or  double `\"\"` quotes. A common and useful example would be\n```\nalias ll = ls -l\n```\n### Full `env` support\nAny word prefixed with a `$` will be interpreted by quantum-shell as an environment variable and replaced with the appropriate value, unless the word is contained within single `''` or  double `\"\"` quotes. What this means is that the command\n```\necho $PATH\n```\nshould return something like\n```\n/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\n```\nIn addition, the entire environment can be viewed at once with the builtin command `printenv`.\n\nYou can also modify or add to the environment using the `export` command. The syntax is similar to the `alias` command, except that only one word is allowed on the right hand side of the assignment. Formally, it is:\n```\nexport <key> = <value>\n```\nWhat this means is that if you need whitespace in the `<value>` (which you normally shouldn't), you'll have to wrap it in single `''` or double `\"\"` quotes.\n### A custom `atom` builtin\nUsing the standard `atom` command line tool is a bit redundant, since you're obviously already running `atom`! For that reason I've provided a custom override for the `atom` command that will allow you to simulate any registered event being dispatched wherever you want. The syntax is pretty simple, there are two options:\n```\natom <command>\n```\nor\n```\natom <selector> <command>\n```\n`<command>` is the (non-humanized) command you would like to dispatch. The optional `<selector>` is where you would like the command to be dispatched. It defaults to the `<atom-workspace>` tag, since that's what you'll probably want to target most often anyway.\n\nAs an example, imagine you want to toggle full-screen mode, but you just can't remember what that darn key-binding is. The solution is quite simple; just pull up `quantum-shell`, type `atom window:toggle-full-screen` and *volia!* you're now in full-screen mode.\n\nHowever, if that seems like a lot to type (probably because it is), try combining the `atom` builtin with the `alias` builtin. Something like:\n```\nalias tfs = atom window:toggle-full-screen\n```\nThen whenever you want to activate that command just type a simple `tfs` into the command line and let `quantum-shell` do the rest!\n\nIf you're thinking to yourself, \"Wow, this is an incredibly powerful alternative to memorizing *all* of those keybindings...\", then I'd say you and I think a lot alike, my friend :wink:\n### Looks Good in any Theme!\n![light](https://raw.githubusercontent.com/sedabull/quantum-shell/master/resources/quantum-shell-light.png)\n\n![dark](https://raw.githubusercontent.com/sedabull/quantum-shell/master/resources/quantum-shell-dark.png)\n",
+  "readmeFilename": "README.md",
+  "homepage": "https://github.com/sedabull/quantum-shell",
+  "_id": "quantum-shell@0.3.4",
+  "_shasum": "2e2d9627485200cf57558ebf0ab967588e366d6b",
+  "_resolved": "file:../d-115230-63118-zfvw9q/package.tgz",
+  "_from": "../d-115230-63118-zfvw9q/package.tgz",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [
+      {
+        "name": "split",
+        "version": "0.3.3",
+        "path": "node_modules/split/index.js"
+      },
+      {
+        "name": "through",
+        "version": "2.3.6",
+        "path": "node_modules/split/node_modules/through/index.js"
+      },
+      {
+        "name": "through2",
+        "version": "0.6.3",
+        "path": "node_modules/through2/through2.js"
+      },
+      {
+        "name": "readable-stream",
+        "version": "1.0.33",
+        "path": "node_modules/through2/node_modules/readable-stream/readable.js"
+      },
+      {
+        "name": "core-util-is",
+        "version": "1.0.1",
+        "path": "node_modules/through2/node_modules/readable-stream/node_modules/core-util-is/lib/util.js"
+      },
+      {
+        "name": "inherits",
+        "version": "2.0.1",
+        "path": "node_modules/through2/node_modules/readable-stream/node_modules/inherits/inherits.js"
+      },
+      {
+        "name": "isarray",
+        "version": "0.0.1",
+        "path": "node_modules/through2/node_modules/readable-stream/node_modules/isarray/index.js"
+      },
+      {
+        "name": "string_decoder",
+        "version": "0.10.31",
+        "path": "node_modules/through2/node_modules/readable-stream/node_modules/string_decoder/index.js"
+      },
+      {
+        "name": "xtend",
+        "version": "4.0.0",
+        "path": "node_modules/through2/node_modules/xtend/immutable.js"
+      },
+      {
+        "name": "underscore-plus",
+        "version": "1.6.6",
+        "path": "node_modules/underscore-plus/lib/underscore-plus.js"
+      },
+      {
+        "name": "underscore",
+        "version": "1.6.0",
+        "path": "node_modules/underscore-plus/node_modules/underscore/underscore.js"
+      }
+    ],
+    "extensions": {
+      ".coffee": [
+        "lib/builtins/bash.coffee",
+        "lib/builtins/custom.coffee",
+        "lib/builtins/sh.coffee",
+        "lib/quantum-shell-controller.coffee",
+        "lib/quantum-shell-model.coffee",
+        "lib/quantum-shell-view.coffee"
+      ],
+      ".js": [
+        "node_modules/split/examples/pretty.js",
+        "node_modules/split/index.js",
+        "node_modules/split/node_modules/through/index.js",
+        "node_modules/through2/node_modules/readable-stream/duplex.js",
+        "node_modules/through2/node_modules/readable-stream/lib/_stream_duplex.js",
+        "node_modules/through2/node_modules/readable-stream/lib/_stream_passthrough.js",
+        "node_modules/through2/node_modules/readable-stream/lib/_stream_readable.js",
+        "node_modules/through2/node_modules/readable-stream/lib/_stream_transform.js",
+        "node_modules/through2/node_modules/readable-stream/lib/_stream_writable.js",
+        "node_modules/through2/node_modules/readable-stream/node_modules/core-util-is/lib/util.js",
+        "node_modules/through2/node_modules/readable-stream/node_modules/core-util-is/util.js",
+        "node_modules/through2/node_modules/readable-stream/node_modules/inherits/inherits.js",
+        "node_modules/through2/node_modules/readable-stream/node_modules/inherits/inherits_browser.js",
+        "node_modules/through2/node_modules/readable-stream/node_modules/inherits/test.js",
+        "node_modules/through2/node_modules/readable-stream/node_modules/isarray/build/build.js",
+        "node_modules/through2/node_modules/readable-stream/node_modules/isarray/index.js",
+        "node_modules/through2/node_modules/readable-stream/node_modules/string_decoder/index.js",
+        "node_modules/through2/node_modules/readable-stream/passthrough.js",
+        "node_modules/through2/node_modules/readable-stream/readable.js",
+        "node_modules/through2/node_modules/readable-stream/transform.js",
+        "node_modules/through2/node_modules/readable-stream/writable.js",
+        "node_modules/through2/node_modules/xtend/immutable.js",
+        "node_modules/through2/node_modules/xtend/mutable.js",
+        "node_modules/through2/node_modules/xtend/test.js",
+        "node_modules/through2/through2.js",
+        "node_modules/underscore-plus/lib/underscore-plus.js",
+        "node_modules/underscore-plus/node_modules/underscore/underscore-min.js",
+        "node_modules/underscore-plus/node_modules/underscore/underscore.js"
+      ],
+      ".json": [
+        "node_modules/split/node_modules/through/package.json",
+        "node_modules/split/package.json",
+        "node_modules/through2/node_modules/readable-stream/node_modules/core-util-is/package.json",
+        "node_modules/through2/node_modules/readable-stream/node_modules/inherits/package.json",
+        "node_modules/through2/node_modules/readable-stream/node_modules/isarray/component.json",
+        "node_modules/through2/node_modules/readable-stream/node_modules/isarray/package.json",
+        "node_modules/through2/node_modules/readable-stream/node_modules/string_decoder/package.json",
+        "node_modules/through2/node_modules/readable-stream/package.json",
+        "node_modules/through2/node_modules/xtend/package.json",
+        "node_modules/through2/package.json",
+        "node_modules/underscore-plus/node_modules/underscore/package.json",
+        "node_modules/underscore-plus/package.json",
+        "package.json"
+      ]
+    },
+    "folders": [
+      {
+        "paths": [
+          "lib/builtins",
+          "lib",
+          "",
+          "spec"
+        ],
+        "dependencies": {
+          "split": "^0.3.2",
+          "through2": "^0.6.3",
+          "underscore-plus": "^1.6.6"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/split/examples",
+          "node_modules/split",
+          "node_modules/split/test"
+        ],
+        "dependencies": {
+          "through": "2"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/through2"
+        ],
+        "dependencies": {
+          "readable-stream": ">=1.0.33-1 <1.1.0-0",
+          "xtend": ">=4.0.0 <4.1.0-0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/through2/node_modules/readable-stream",
+          "node_modules/through2/node_modules/readable-stream/lib"
+        ],
+        "dependencies": {
+          "core-util-is": "~1.0.0",
+          "isarray": "0.0.1",
+          "string_decoder": "~0.10.x",
+          "inherits": "~2.0.1"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/underscore-plus/lib",
+          "node_modules/underscore-plus"
+        ],
+        "dependencies": {
+          "underscore": "~1.6.0"
+        }
+      }
+    ]
+  }
+}
