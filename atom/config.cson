@@ -1,0 +1,21 @@
+"*":
+  editor:
+    showIndentGuide: true
+    tabLength: 4
+    fontSize: 12
+    invisibles: {}
+  core:
+    themes: [
+      "atom-dark-ui"
+      "solarized-dark-syntax"
+    ]
+  "exception-reporting":
+    userId: "d32407e2-e581-bf13-eb30-a2768a49d1f5"
+  welcome:
+    showOnStartup: false
+  metrics:
+    userId: "5849e0f7161278ad633bb5457e1921f0682c7eb4"
+  "vim-mode":
+    useClipboardAsDefaultRegister: true
+  linter: {}
+  minimap: {}
