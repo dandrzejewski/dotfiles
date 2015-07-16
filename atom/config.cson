@@ -4,11 +4,13 @@
     tabLength: 4
     fontSize: 12
     invisibles: {}
+    scrollPastEnd: true
   core:
     themes: [
-      "atom-dark-ui"
+      "atom-solarized-dark-ui"
       "solarized-dark-syntax"
     ]
+    audioBeep: false
   "exception-reporting":
     userId: "d32407e2-e581-bf13-eb30-a2768a49d1f5"
   welcome:

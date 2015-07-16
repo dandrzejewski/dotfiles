@@ -54,7 +54,7 @@ class Operator
         text += '\n'
     else
       type = Utils.copyType(text)
-    @vimState.setRegister(register, {text, type})
+    @vimState.setRegister(register, {text, type}) unless text is ''
 
 # Public: Generic class for an operator that requires extra input
 class OperatorWithInput extends Operator
@@ -93,14 +93,15 @@ class Delete extends Operator
   # Returns nothing.
   execute: (count) ->
     if _.contains(@motion.select(count, @selectOptions), true)
-      text = @editor.getSelectedText()
-      @setTextRegister(@register, text)
-      @editor.delete()
+      @setTextRegister(@register, @editor.getSelectedText())
+      @editor.transact =>
+        for selection in @editor.getSelections()
+          selection.deleteSelectedText()
       for cursor in @editor.getCursors()
         if @motion.isLinewise?()
-          cursor.moveToBeginningOfLine()
+          cursor.skipLeadingWhitespace()
         else
-          cursor.moveLeft() if cursor.isAtEndOfLine()
+          cursor.moveLeft() if cursor.isAtEndOfLine() and not cursor.isAtBeginningOfLine()
 
     @vimState.activateCommandMode()
 
@@ -239,13 +240,13 @@ class Repeat extends Operator
 class Mark extends OperatorWithInput
   constructor: (@editor, @vimState, {@selectOptions}={}) ->
     super(@editor, @vimState)
-    @viewModel = new ViewModel(@, class: 'mark', singleChar: true, hidden: true)
+    @viewModel = new ViewModel(this, class: 'mark', singleChar: true, hidden: true)
 
   # Public: Creates the mark in the specified mark register (from user input)
   # at the current position
   #
   # Returns nothing.
-  execute: () ->
+  execute: ->
     @vimState.setMark(@input.characters, @editor.getCursorBufferPosition())
     @vimState.activateCommandMode()
 
