@@ -1,11 +1,12 @@
 fs = require 'fs'
 path = require 'path'
 {CompositeDisposable, Range, Point, BufferedProcess} = require 'atom'
-_ = null
 XRegExp = null
+{deprecate} = require('grim')
 
-{log, warn} = require './utils'
-
+# These are NOOPs in linter-plus
+log = -> undefined
+warn = -> undefined
 
 # Public: The base class for linters.
 # Subclasses must at a minimum define the attributes syntax, cmd, and regex.
@@ -48,15 +49,37 @@ class Linter
   # TODO: what does this mean?
   errorStream: 'stdout'
 
+  # Base options
+  baseOptions: ['executionTimeout']
+
+  # Child options
+  options: []
+
   # Public: Construct a linter passing it's base editor
   constructor: (@editor) ->
+    deprecate('AtomLinter v0.X.Y API has been deprecated.
+      Please refer to the Linter docs to update and the latest API:
+      https://github.com/AtomLinter/Linter/wiki/Migrating-to-the-new-API')
+
     @cwd = path.dirname(@editor.getPath())
 
     @subscriptions = new CompositeDisposable
-    @subscriptions.add atom.config.observe 'linter.executionTimeout', (x) =>
-      @executionTimeout = x
+
+    # Load options from `linter`
+    @observeOption('linter', option) for option in @baseOptions
+
+    # Load options from `linter-child`
+    @observeOption("linter-#{@linterName}", option) for option in @options
 
     @_statCache = new Map()
+
+  observeOption: (prefix, option) ->
+    callback = @updateOption.bind(this, prefix, option)
+    @subscriptions.add atom.config.observe "#{prefix}.#{option}", callback
+
+  updateOption: (prefix, option) =>
+    @[option] = atom.config.get "#{prefix}.#{option}"
+    log "Updating `#{prefix}` #{option} to #{@[option]}"
 
   destroy: ->
     @subscriptions.dispose()
@@ -118,6 +141,14 @@ class Linter
   getNodeExecutablePath: ->
     path.join atom.packages.getApmPath(), '..', 'node'
 
+  linterNotFound: ->
+    notFoundMessage = "Linting has been halted.
+        Please install the linter binary or disable the linter plugin depending on it.
+        Make sure to reload Atom to detect changes"
+    atom.notifications.addError "
+      The linter binary '#{@linterName}' cannot be found.",
+      {detail: notFoundMessage, dismissable: true}
+
   # Public: Primary entry point for a linter, executes the linter then calls
   #         processMessage in order to handle standard output
   #
@@ -137,33 +168,54 @@ class Linter
 
     stdout = (output) ->
       log 'stdout', output
-      dataStdout += output
+      dataStdout.push output
 
     stderr = (output) ->
       warn 'stderr', output
-      dataStderr += output
+      dataStderr.push output
 
-    exit = =>
+    exit = (exitCode) =>
       exited = true
+      if exitCode is 8
+        # Exit code of node when the file you execute doesn't exist
+        return @linterNotFound()
       switch @errorStream
         when 'file'
           reportFilePath = @getReportFilePath(filePath)
           if fs.existsSync reportFilePath
             data = fs.readFileSync(reportFilePath)
-        when 'stdout' then data = dataStdout
-        else data = dataStderr
+        when 'stdout' then data = dataStdout.join('')
+        else data = dataStderr.join('')
       @processMessage data, callback
 
-    process = new BufferedProcess({command, args, options,
+    {command, args, options} = @beforeSpawnProcess(command, args, options)
+    log("beforeSpawnProcess:", command, args, options)
+
+    SpawnedProcess = new BufferedProcess({command, args, options,
                                   stdout, stderr, exit})
+    SpawnedProcess.onWillThrowError (err) =>
+      return unless err?
+      if err.error.code is 'ENOENT'
+        # Add defaults because the new linter doesn't include these configs
+        @linterNotFound()
 
     # Kill the linter process if it takes too long
     if @executionTimeout > 0
       setTimeout =>
         return if exited
-        process.kill()
+        SpawnedProcess.kill()
         warn "command `#{command}` timed out after #{@executionTimeout} ms"
       , @executionTimeout
+
+  # Public: Gives subclasses a chance to read or change the command, args and
+  #         options, before creating new BufferedProcess while lintFile.
+  #   command: a string of executablePath
+  #   args: an array of string arguments
+  #   options: an object of options (has cwd field)
+  # Returns an object of {command, args, options}
+  # Override this if you want to read or change these arguments
+  beforeSpawnProcess: (command, args, options) ->
+    {command: command, args: args, options: options}
 
   # Private: process the string result of a linter execution using the regex
   #          as the message builder
@@ -173,8 +225,8 @@ class Linter
   processMessage: (message, callback) ->
     messages = []
     XRegExp ?= require('xregexp').XRegExp
-    regex = XRegExp @regex, @regexFlags
-    XRegExp.forEach message, regex, (match, i) =>
+    @MessageRegexp ?= XRegExp @regex, @regexFlags
+    XRegExp.forEach message, @MessageRegexp, (match, i) =>
       msg = @createMessage match
       messages.push msg if msg.range?
     , this
@@ -200,7 +252,7 @@ class Linter
     else if match.info
       level = 'info'
     else
-      level = @defaultLevel
+      level = match.level or @defaultLevel
 
     # If no line/col is found, assume a full file error
     # TODO: This conflicts with the docs above that say line is required :(
@@ -231,10 +283,9 @@ class Linter
     return text?.length or 0
 
   getEditorScopesForPosition: (position) ->
-    _ ?= require 'lodash'
     try
       # return a copy in case it gets mutated (hint: it does)
-      _.clone @editor.displayBuffer.tokenizedBuffer.scopesForPosition(position)
+      @editor.displayBuffer.tokenizedBuffer.scopesForPosition(position).slice()
     catch
       # this can throw if the line has since been deleted
       []

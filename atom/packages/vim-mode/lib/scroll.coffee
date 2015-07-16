@@ -1,11 +1,12 @@
 class Scroll
   isComplete: -> true
   isRecordable: -> false
-  constructor: (@editor) ->
+  constructor: (@editorElement) ->
     @scrolloff = 2 # atom default
+    @editor = @editorElement.getModel()
     @rows =
-      first: @editor.getFirstVisibleScreenRow()
-      last: @editor.getLastVisibleScreenRow()
+      first: @editorElement.getFirstVisibleScreenRow()
+      last: @editorElement.getLastVisibleScreenRow()
       final: @editor.getLastScreenRow()
 
 class ScrollDown extends Scroll
@@ -32,17 +33,17 @@ class ScrollUp extends Scroll
     {row, column} = @editor.getCursorScreenPosition()
     lastScreenRow = @rows.last - @scrolloff - 1
     if row + count >= lastScreenRow
-        @editor.setCursorScreenPosition([lastScreenRow - count, column])
+      @editor.setCursorScreenPosition([lastScreenRow - count, column])
 
   scrollDown: (count) ->
     firstScreenRow = @rows.first + @scrolloff
     @editor.scrollToScreenPosition([firstScreenRow - count, 0])
 
 class ScrollCursor extends Scroll
-  constructor: (@editor, @opts={}) ->
+  constructor: (@editorElement, @opts={}) ->
     super
     cursor = @editor.getCursorScreenPosition()
-    @pixel = @editor.pixelPositionForScreenPosition(cursor).top
+    @pixel = @editorElement.pixelPositionForScreenPosition(cursor).top
 
 class ScrollCursorToTop extends ScrollCursor
   execute: ->
@@ -83,37 +84,27 @@ class ScrollCursorToBottom extends ScrollCursor
   moveToFirstNonBlank: ->
     @editor.moveToFirstCharacterOfLine()
 
-class ScrollHalfScreenUp extends Scroll
+class ScrollHorizontal
+  isComplete: -> true
+  isRecordable: -> false
+  constructor: (@editorElement) ->
+    @editor = @editorElement.getModel()
+    cursorPos = @editor.getCursorScreenPosition()
+    @pixel = @editorElement.pixelPositionForScreenPosition(cursorPos).left
+    @cursor = @editor.getLastCursor()
+
+  putCursorOnScreen: ->
+    @editor.scrollToCursorPosition({center: false})
+
+class ScrollCursorToLeft extends ScrollHorizontal
   execute: ->
-    @scrollDown()
-    @moveCursor()
+    @editor.setScrollLeft(@pixel)
+    @putCursorOnScreen()
 
-  moveCursor: ->
-    {row, column} = @editor.getCursorScreenPosition()
-    currentFirstScreenRow = @editor.getFirstVisibleScreenRow()
-    dest = currentFirstScreenRow + row - @rows.first
-    if dest >= 0
-      @editor.setCursorScreenPosition([dest, column])
-
-  scrollDown: ->
-    dest = @editor.getScrollTop() - Math.floor(@editor.getHeight() / 2)
-    @editor.setScrollTop(dest)
-
-class ScrollHalfScreenDown extends Scroll
+class ScrollCursorToRight extends ScrollHorizontal
   execute: ->
-    @scrollUp()
-    @moveCursor()
+    @editor.setScrollRight(@pixel)
+    @putCursorOnScreen()
 
-  moveCursor: ->
-    {row, column} = @editor.getCursorScreenPosition()
-    currentFirstScreenRow = @editor.getFirstVisibleScreenRow()
-    dest = currentFirstScreenRow + row - @rows.first
-    if dest <= @rows.final
-      @editor.setCursorScreenPosition([dest, column])
-
-  scrollUp: ->
-    dest = @editor.getScrollTop() + Math.floor(@editor.getHeight() / 2)
-    @editor.setScrollTop(dest)
-
-module.exports = { ScrollDown, ScrollUp, ScrollCursorToTop, ScrollCursorToMiddle,
-  ScrollCursorToBottom, ScrollHalfScreenUp, ScrollHalfScreenDown }
+module.exports = {ScrollDown, ScrollUp, ScrollCursorToTop, ScrollCursorToMiddle,
+  ScrollCursorToBottom, ScrollCursorToLeft, ScrollCursorToRight}

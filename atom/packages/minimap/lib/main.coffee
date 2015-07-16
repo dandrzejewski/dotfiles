@@ -24,9 +24,6 @@ class Main
 
   ### Public ###
 
-  # The minimap package version
-  version: require('../package.json').version
-
   # The default minimap settings
   config:
     plugins:
@@ -87,6 +84,10 @@ class Main
     createPluginInDevMode:
       type: 'boolean'
       default: false
+    absoluteMode:
+      type: 'boolean'
+      default: false
+      description: 'When enabled the text editor content will be able to flow below the minimap.'
 
   # Internal: The activation state of the minimap package.
   active: false
@@ -99,7 +100,9 @@ class Main
     @subscriptionsOfCommands = new CompositeDisposable
     @subscriptionsOfCommands.add atom.commands.add 'atom-workspace',
       'minimap:toggle': => @toggle()
-      'minimap:generate-plugin': => @generatePlugin()
+      'minimap:generate-coffee-plugin': => @generatePlugin('coffee')
+      'minimap:generate-javascript-plugin': => @generatePlugin('javascript')
+      'minimap:generate-babel-plugin': => @generatePlugin('babel')
 
     # Other Subscriptions
     @subscriptions = new CompositeDisposable
@@ -123,18 +126,6 @@ class Main
     @toggled = false
     @active = false
 
-  # Verifies that the passed-in version expression is satisfied by
-  # the current minimap version.
-  #
-  # expectedVersion - A [semver](https://github.com/npm/node-semver)
-  #                   compatible expression to match agains the minimap
-  #                   version.
-  #
-  # Returns a {Boolean}.
-  versionMatch: (expectedVersion) ->
-    semver ?= require 'semver'
-    semver.satisfies(@version, expectedVersion)
-
   # Toggles the minimap display.
   toggle: ->
     return unless @active
@@ -149,9 +140,10 @@ class Main
       @initSubscriptions()
 
   # Opens the plugin generation view.
-  generatePlugin: ->
+  generatePlugin: (template) ->
     MinimapPluginGeneratorElement ?= require './minimap-plugin-generator-element'
     view = new MinimapPluginGeneratorElement()
+    view.template = template
     view.attach()
 
   # Calls the `callback` when the minimap package have been activated.
@@ -272,11 +264,7 @@ class Main
     return unless iterator?
     @editorsMinimaps?.forEach (minimap) -> iterator(minimap)
     createdCallback = (minimap) -> iterator(minimap)
-    disposable = @onDidCreateMinimap(createdCallback)
-    disposable.off = ->
-      deprecate('Use Disposable::dispose instead')
-      disposable.dispose()
-    disposable
+    @onDidCreateMinimap(createdCallback)
 
   # Internal: Registers to the `observeTextEditors` method.
   initSubscriptions: ->

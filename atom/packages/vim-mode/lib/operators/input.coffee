@@ -9,10 +9,10 @@ settings = require '../settings'
 class Insert extends Operator
   standalone: true
 
-  isComplete: -> @standalone || super
+  isComplete: -> @standalone or super
 
-  confirmTransaction: (transaction) ->
-    bundler = new TransactionBundler(transaction)
+  confirmChanges: (changes) ->
+    bundler = new TransactionBundler(changes, @editor)
     @typedText = bundler.buildInsertText()
 
   execute: ->
@@ -100,7 +100,8 @@ class Change extends Insert
         @editor.insertNewline()
         @editor.moveLeft()
       else
-        @editor.delete()
+        for selection in @editor.getSelections()
+          selection.deleteSelectedText()
 
     return super if @typingCompleted
 
@@ -117,8 +118,7 @@ class Substitute extends Insert
     @vimState.setInsertionCheckpoint() unless @typingCompleted
     _.times count, =>
       @editor.selectRight()
-    text = @editor.getLastSelection().getText()
-    @setTextRegister(@register, text)
+    @setTextRegister(@register, @editor.getSelectedText())
     @editor.delete()
 
     if @typingCompleted
@@ -140,8 +140,7 @@ class SubstituteLine extends Insert
     _.times count, =>
       @editor.selectToEndOfLine()
       @editor.selectRight()
-    text = @editor.getLastSelection().getText()
-    @setTextRegister(@register, text)
+    @setTextRegister(@register, @editor.getSelectedText())
     @editor.delete()
     @editor.insertNewlineAbove()
     @editor.getLastCursor().skipLeadingWhitespace()
@@ -156,32 +155,68 @@ class SubstituteLine extends Insert
 # Takes a transaction and turns it into a string of what was typed.
 # This class is an implementation detail of Insert
 class TransactionBundler
-  constructor: (@transaction) ->
-    @position = null
-    @content = ""
+  constructor: (@changes, @editor) ->
+    @start = null
+    @end = null
 
   buildInsertText: ->
-    @addPatch(patch) for patch in @transaction.patches ? []
-    @content
+    @addChange(change) for change in @changes
+    if @start?
+      @editor.getTextInBufferRange [@start, @end]
+    else
+      ""
 
-  addPatch: (patch) ->
-    return unless patch.newRange?
-    if @isAppending(patch)
-      @content += patch.newText
-      @position = patch.newRange.end
-    else if @isRemovingFromEnd(patch)
-      @content = @content.substring(0, @content.length - patch.oldText.length)
-      @position = patch.newRange.end
+  addChange: (change) ->
+    return unless change.newRange?
+    if @isRemovingFromPrevious(change)
+      @subtractRange change.oldRange
+    if @isAddingWithinPrevious(change)
+      @addRange change.newRange
 
-  isAppending: (patch) ->
-    (patch.newText.length > 0) and
-      (patch.oldText.length is 0) and
-      ((not @position) or @position.isEqual(patch.newRange.start))
+  isAddingWithinPrevious: (change) ->
+    return false unless @isAdding(change)
 
-  isRemovingFromEnd: (patch) ->
-    (patch.newText.length is 0) and
-      (patch.oldText.length > 0) and
-      (@position and @position?.isEqual(patch.oldRange.end))
+    return true if @start is null
+
+    @start.isLessThanOrEqual(change.newRange.start) and
+      @end.isGreaterThanOrEqual(change.newRange.start)
+
+  isRemovingFromPrevious: (change) ->
+    return false unless @isRemoving(change) and @start?
+
+    @start.isLessThanOrEqual(change.oldRange.start) and
+      @end.isGreaterThanOrEqual(change.oldRange.end)
+
+  isAdding: (change) ->
+    change.newText.length > 0
+
+  isRemoving: (change) ->
+    change.oldText.length > 0
+
+  addRange: (range) ->
+    if @start is null
+      {@start, @end} = range
+      return
+
+    rows = range.end.row - range.start.row
+
+    if (range.start.row is @end.row)
+      cols = range.end.column - range.start.column
+    else
+      cols = 0
+
+    @end = @end.translate [rows, cols]
+
+  subtractRange: (range) ->
+    rows = range.end.row - range.start.row
+
+    if (range.end.row is @end.row)
+      cols = range.end.column - range.start.column
+    else
+      cols = 0
+
+    @end = @end.translate [-rows, -cols]
+
 
 module.exports = {
   Insert,
