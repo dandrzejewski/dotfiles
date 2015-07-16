@@ -3,7 +3,11 @@
 HELPDIR=/usr/local/share/zsh/help
 
 if [[ -a $HOME/.local/bin ]]; then
-	export PATH=$PATH:$HOME/.local/bin:$HOME/bin
+	export PATH=$PATH:$HOME/.local/bin
+fi
+
+if [[ -a $HOME/bin ]]; then
+	export PATH=$PATH:$HOME/bin
 fi
 
 
