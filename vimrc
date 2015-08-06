@@ -3,8 +3,6 @@ syntax on
 set guifont=Courier_New:h8
 set showtabline=2
 
-
-
 filetype plugin indent on
 
 " Set the leader key to a comma
@@ -53,6 +51,7 @@ set smartcase
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
+set expandtab
 
 " Match braces/brackets/parens
 set showmatch
@@ -66,6 +65,12 @@ set vb t_vb=
 " Search for text as you enter it
 set incsearch
 
+" Highlight search matches
+set hlsearch
+
+" turn off search highlight
+nnoremap <leader><space> :nohlsearch<CR>
+
 " Allow the cursor to roam free!
 " set virtualedit=all
 
@@ -77,6 +82,32 @@ set wildmode=longest,list
 
 " Enable horizontal scrollbar
 set guioptions+=b
+
+" Show command in bottom bar
+set showcmd
+
+" Highlight current line
+set cursorline
+
+" Graphical menu of matches when completing a file name
+set wildmenu
+
+" Don't redraw all the time.
+set lazyredraw
+
+" Code folding
+set foldenable
+set foldlevelstart=10
+set foldnestmax=10
+
+" space open/closes folds
+nnoremap <space> za
+
+set foldmethod=indent
+
+
+" jk is escape
+inoremap jk <esc>
 
 let &titlestring = "[vim(" . expand("%:t") . ")]"
 if &term == "screen"
