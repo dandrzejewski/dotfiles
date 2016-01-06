@@ -48,9 +48,9 @@ set ignorecase
 set smartcase
 
 " 4-space tabs
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set expandtab
 
 " Match braces/brackets/parens

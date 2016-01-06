@@ -1,6 +1,17 @@
 {
 	"segments": {
 		"right": [
+      {
+        "function": "powerline.segments.common.wthr.weather",
+        "args": {
+          "unit": "F",
+          "location_query": "44124"
+        }
+      },
+      {
+        "function": "powerline.segments.tmux.attached_clients",
+        "priority": 50
+      },
 			{
 				"function": "powerline.segments.common.sys.uptime",
 				"priority": 50
