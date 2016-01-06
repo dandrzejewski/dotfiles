@@ -10,6 +10,11 @@ if [[ -a $HOME/bin ]]; then
 	export PATH=$PATH:$HOME/bin
 fi
 
+if [[ -a $HOME/scripts ]]; then
+    export PATH=$PATH:$HOME/scripts
+fi
+
+
 
 powerline-daemon -q
 
