@@ -2,6 +2,8 @@
 #autoload run-help
 HELPDIR=/usr/local/share/zsh/help
 
+export LOCALE=en_US.UTF-8
+
 if [[ -a $HOME/.local/bin ]]; then
 	export PATH=$PATH:$HOME/.local/bin
 fi
