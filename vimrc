@@ -1,3 +1,4 @@
+
 set nowrap
 syntax on
 set guifont=Courier_New:h8
@@ -146,5 +147,11 @@ set guifont=Inconsolata\ for\ Powerline:h14
 set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 
 " set statusline=%04n\ %t%(\ %m%r%y[%{&ff}][%{&fenc}]\ \ %{mode()}%)\ %a%=col\ %v\ \ line\ %l/%L\ %p%%                                                                                   
+
+" Pathogen
+execute pathogen#infect()
+
+" NERDTree
+map <C-n> :NERDTreeToggle<CR>
 
 
