@@ -51,6 +51,6 @@ bindkey '^[[1;9D' backward-word
 alias ll="ls -l"
 
 # Always grep with color
-export GREP_OPTIONS='--color=always'
+export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='1;35;40'
 
