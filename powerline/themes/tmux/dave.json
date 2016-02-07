@@ -10,11 +10,11 @@
       },
       {
         "function": "powerline.segments.tmux.attached_clients",
-        "priority": 50
+        "priority": "50"
       },
 			{
 				"function": "powerline.segments.common.sys.system_load",
-				"priority": 50
+				"priority": "50"
 			},
 			{
 				"function": "powerline.segments.common.time.date"
@@ -24,7 +24,7 @@
 				"name": "time",
 				"args": {
 					"format": "%H:%M",
-					"istime": true
+					"istime": "true"
 				}
 			},
 			{
