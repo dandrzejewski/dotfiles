@@ -1,0 +1,33 @@
+#!/bin/bash
+
+function usage {
+	cat <<-END
+		vi - Edit todo.txt
+			
+		Usage:
+		    vi
+          Edit todo.txt.
+		END
+	exit 0
+}
+
+function viTodo {
+  if [ -z "$EDITOR" ]; then
+    vi "$TODO_DIR/todo.txt"
+  else
+    $EDITOR "$TODO_DIR/todo.txt"
+  fi
+  exit 0
+}
+
+if [ "$1" == "usage" ]; then
+	usage
+fi
+
+shift
+
+if [ -z "$1" ]; then
+	viTodo
+else
+	usage
+fi
