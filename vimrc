@@ -154,4 +154,10 @@ execute pathogen#infect()
 " NERDTree
 map <C-n> :NERDTreeToggle<CR>
 
+au BufNewFile,BufRead *.gradle setf groovy
+
+" Remember the last position in a file.
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
 

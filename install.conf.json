@@ -8,7 +8,8 @@
             "~/.vim": "vim/",
             "~/.todo.cfg": "todo.cfg",
             "~/.config/powerline": "powerline",
-            "~/.atom": "atom/"
+            "~/.atom": "atom/",
+            "~/.todo.actions.d": "todo.actions.d/"
         }
     },
     {

@@ -2,6 +2,10 @@
 #autoload run-help
 HELPDIR=/usr/local/share/zsh/help
 
+if [[ -a $HOME/.local_zshrc ]]; then
+  source .local_zshrc
+fi
+
 export LOCALE=en_US.UTF-8
 
 if [[ -a $HOME/.local/bin ]]; then
@@ -16,7 +20,9 @@ if [[ -a $HOME/scripts ]]; then
     export PATH=$PATH:$HOME/scripts
 fi
 
-
+if [ `uname` = "Darwin" ]; then
+  export JAVA_HOME=$(/usr/libexec/java_home)
+fi
 
 powerline-daemon -q
 
@@ -43,10 +49,16 @@ bindkey '^[[1;9D' backward-word
 
 alias t=todo.sh
 
+# changes hex 0x15 to delete everything to the left of the cursor,
+# rather than the whole line
+bindkey "^U" backward-kill-line
+#
+# binds hex 0x18 0x7f with deleting everything to the left of the cursor
+bindkey "^Xx7f" backward-kill-line
 
-bindkey -e
-bindkey '^[[1;9C' forward-word
-bindkey '^[[1;9D' backward-word
+# adds redo
+bindkey "^X^_" redo
+
 
 alias ll="ls -l"
 
