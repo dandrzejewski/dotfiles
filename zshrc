@@ -36,6 +36,8 @@ elif [[ -a /usr/local/lib/python2.7/site-packages/powerline/ ]]; then
 	export POWERLINE_LOC="/usr/local/lib/python2.7/site-packages/powerline"
 elif [[ -a /usr/share/powerline ]]; then
 	export POWERLINE_LOC="/usr/share/powerline"
+elif [[ -a $HOME/.local/lib/python3.4/site-packages/powerline ]]; then
+  export POWERLINE_LOC="$HOME/.local/lib/python3.4/site-packages/powerline"
 fi
 
 . $POWERLINE_LOC/bindings/zsh/powerline.zsh
@@ -63,7 +65,8 @@ bindkey "^X^_" redo
 alias ll="ls -l"
 
 # Always grep with color
-export GREP_OPTIONS='--color=auto'
+#export GREP_OPTIONS='--color=auto'
+alias grep="grep --color-auto"
 export GREP_COLOR='1;35;40'
 
 ## History
