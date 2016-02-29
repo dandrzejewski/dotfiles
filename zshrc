@@ -65,8 +65,7 @@ bindkey "^X^_" redo
 alias ll="ls -l"
 
 # Always grep with color
-#export GREP_OPTIONS='--color=auto'
-alias grep="grep --color-auto"
+alias grep="grep --color=auto"
 export GREP_COLOR='1;35;40'
 
 ## History
