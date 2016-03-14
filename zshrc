@@ -48,6 +48,7 @@ bindkey '^[[1;9C' forward-word
 bindkey '^[[1;9D' backward-word
 
 alias t=todo.sh
+alias th="todo.sh -d ~/Dropbox/todo/dropbox_todo.cfg"
 
 # changes hex 0x15 to delete everything to the left of the cursor,
 # rather than the whole line
