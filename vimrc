@@ -122,7 +122,7 @@ if &term == "screen" || &term == "xterm"
 endif
 
 
-set rtp+=/Users/raguay/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim
+set rtp+=/Users/dandrzejewski/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim
  
 " These lines setup the environment to show graphics and colors correctly.
 set nocompatible
