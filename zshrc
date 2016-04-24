@@ -3,7 +3,7 @@
 HELPDIR=/usr/local/share/zsh/help
 
 if [[ -a $HOME/.local_zshrc ]]; then
-  source .local_zshrc
+  source $HOME/.local_zshrc
 fi
 
 export LOCALE=en_US.UTF-8
@@ -36,6 +36,8 @@ elif [[ -a /usr/local/lib/python2.7/site-packages/powerline/ ]]; then
 	export POWERLINE_LOC="/usr/local/lib/python2.7/site-packages/powerline"
 elif [[ -a /usr/share/powerline ]]; then
 	export POWERLINE_LOC="/usr/share/powerline"
+elif [[ -a $HOME/.local/lib/python3.4/site-packages/powerline ]]; then
+  export POWERLINE_LOC="$HOME/.local/lib/python3.4/site-packages/powerline"
 fi
 
 . $POWERLINE_LOC/bindings/zsh/powerline.zsh
@@ -48,6 +50,7 @@ bindkey '^[[1;9C' forward-word
 bindkey '^[[1;9D' backward-word
 
 alias t=todo.sh
+alias th="todo.sh -d ~/Dropbox/todo/dropbox_todo.cfg"
 
 # changes hex 0x15 to delete everything to the left of the cursor,
 # rather than the whole line
@@ -63,6 +66,14 @@ bindkey "^X^_" redo
 alias ll="ls -l"
 
 # Always grep with color
-export GREP_OPTIONS='--color=auto'
+alias grep="grep --color=auto"
 export GREP_COLOR='1;35;40'
+
+## History
+HISTFILE=$HOME/.zhistory       # enable history saving on shell exit
+setopt APPEND_HISTORY          # append rather than overwrite history file.
+HISTSIZE=1200                  # lines of history to maintain memory
+SAVEHIST=1000                  # lines of history to maintain in history file.
+setopt HIST_EXPIRE_DUPS_FIRST  # allow dups, but expire old ones when I hit HISTSIZE
+setopt EXTENDED_HISTORY        # save timestamp and runtime information
 
