@@ -1,6 +1,6 @@
 {
-	"segments": {
-		"right": [
+  "segments": {
+    "right": [
       {
         "function": "powerline.segments.common.wthr.weather",
         "args": {
@@ -9,27 +9,30 @@
         }
       },
       {
+        "function": "powerlinemem.mem_usage.mem_usage"
+      },
+      {
         "function": "powerline.segments.tmux.attached_clients",
         "priority": "50"
       },
-			{
-				"function": "powerline.segments.common.sys.system_load",
-				"priority": "50"
-			},
-			{
-				"function": "powerline.segments.common.time.date"
-			},
-			{
-				"function": "powerline.segments.common.time.date",
-				"name": "time",
-				"args": {
-					"format": "%H:%M",
-					"istime": "true"
-				}
-			},
-			{
-				"function": "powerline.segments.common.net.hostname"
-			}
-		]
-	}
+      {
+        "function": "powerline.segments.common.sys.system_load",
+        "priority": "50"
+      },
+      {
+        "function": "powerline.segments.common.time.date"
+      },
+      {
+        "function": "powerline.segments.common.time.date",
+        "name": "time",
+        "args": {
+          "format": "%H:%M",
+          "istime": "true"
+        }
+      },
+      {
+        "function": "powerline.segments.common.net.hostname"
+      }
+    ]
+  }
 }
