@@ -28,6 +28,10 @@ set nobackup
 
 " On-screen line numbering
 set number
+
+" Relative numbering
+set relativenumber
+
 set nuw=6
 
 " File Explorer (F2)
@@ -155,6 +159,7 @@ execute pathogen#infect()
 map <C-n> :NERDTreeToggle<CR>
 
 au BufNewFile,BufRead *.gradle setf groovy
+au BufNewFile,BufRead *.md set filetype=markdown
 
 " Remember the last position in a file.
 if has("autocmd")
