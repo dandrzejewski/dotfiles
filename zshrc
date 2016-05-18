@@ -3,7 +3,7 @@
 HELPDIR=/usr/local/share/zsh/help
 
 if [[ -a $HOME/.local_zshrc ]]; then
-  source .local_zshrc
+  source $HOME/.local_zshrc
 fi
 
 export LOCALE=en_US.UTF-8
