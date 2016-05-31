@@ -22,6 +22,7 @@ fi
 
 if [ `uname` = "Darwin" ]; then
   export JAVA_HOME=$(/usr/libexec/java_home)
+  export DEVELOPER_DIR=/Applications/Xcode.app
 fi
 
 powerline-daemon -q
