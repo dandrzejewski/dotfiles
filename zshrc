@@ -73,10 +73,11 @@ export GREP_COLOR='1;35;40'
 ## History
 HISTFILE=$HOME/.zhistory       # enable history saving on shell exit
 setopt APPEND_HISTORY          # append rather than overwrite history file.
-HISTSIZE=1200                  # lines of history to maintain memory
-SAVEHIST=1000                  # lines of history to maintain in history file.
+HISTSIZE=10000                  # lines of history to maintain memory
+SAVEHIST=20000                  # lines of history to maintain in history file.
 setopt HIST_EXPIRE_DUPS_FIRST  # allow dups, but expire old ones when I hit HISTSIZE
 setopt EXTENDED_HISTORY        # save timestamp and runtime information
+#setopt SHARE_HISTORY         # This shares the history between different instances of zsh... not sure I like that.
 
 
 PATH="/Users/dave/perl5/bin${PATH:+:${PATH}}"; export PATH;
