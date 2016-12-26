@@ -88,3 +88,7 @@ PERL_MM_OPT="INSTALL_BASE=/Users/dave/perl5"; export PERL_MM_OPT;
 
 
 PATH=$PATH:$HOME/.vimpkg/bin
+
+# Add support for thefuck
+eval "$(thefuck --alias)"
+
