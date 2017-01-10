@@ -88,3 +88,7 @@ setopt EXTENDED_HISTORY        # save timestamp and runtime information
 
 
 PATH=$PATH:$HOME/.vimpkg/bin
+
+# Add support for thefuck
+eval "$(thefuck --alias)"
+
