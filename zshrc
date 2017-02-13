@@ -23,12 +23,15 @@ fi
 if [ `uname` = "Darwin" ]; then
   export JAVA_HOME=$(/usr/libexec/java_home)
   export DEVELOPER_DIR=/Applications/Xcode.app
+  export PATH=$PATH:$HOME/Library/Python/3.6/bin
 fi
 
 powerline-daemon -q
 
 if [[ -a $HOME/.local/lib/python2.7/site-packages/powerline ]]; then
 	export POWERLINE_LOC="$HOME/.local/lib/python2.7/site-packages/powerline"
+elif [[ -a $HOME/Library/Python/3.6/lib/python/site-packages/powerline ]]; then
+   export POWERLINE_LOC="$HOME/Library/Python/3.6/lib/python/site-packages/powerline"
 elif [[ -a $HOME/Library/Python/2.7/lib/python/site-packages/powerline ]]; then
     export POWERLINE_LOC="$HOME/Library/Python/2.7/lib/python/site-packages/powerline"
 elif [[ -a /usr/local/lib/python2.7/dist-packages/powerline ]]; then

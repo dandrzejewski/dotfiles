@@ -15,7 +15,7 @@
     {
         "shell": [
             [
-              "pip3 install --user git+git://github.com/powerline/powerline",
+              "pip3 install --user git+https://github.com/powerline/powerline",
               "Installing powerline with pip3"
             ],
             [
@@ -23,11 +23,11 @@
                 "Installing submodules"
             ],
             [
-              "pip install --user powerline-mem-segment",
+              "pip3 install --user powerline-mem-segment",
               "Installing powerline mem segment"
             ],
             [
-              "pip install --user thefuck",
+              "pip3 install --user thefuck",
               "Installing thefuck"
             ]
         ]
