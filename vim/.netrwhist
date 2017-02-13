@@ -1,8 +1,4 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/Users/dandrzejewski/Downloads/pycrypto-2.6/LEGAL'
-let g:netrw_dirhist_2='/Users/dandrzejewski/.vim'
-let g:netrw_dirhist_3='/Users/dandrzejewski/rcfiles/vim/syntax'
-let g:netrw_dirhist_4='/usr/local/etc/squid/squidGuard'
-let g:netrw_dirhist_5='/Users/dandrzejewski/.vim'
-let g:netrw_dirhist_6='/Users/dandrzejewski/dev/mistore/7.0_branch_iStore/build'
+let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_1='/etc/default/grub.d'
+let g:netrw_dirhist_2='/etc/iptables'

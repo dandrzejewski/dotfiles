@@ -15,12 +15,20 @@
     {
         "shell": [
             [
+              "pip3 install --user git+git://github.com/powerline/powerline",
+              "Installing powerline with pip3"
+            ],
+            [
                 "git submodule update --init --recursive",
                 "Installing submodules"
             ],
             [
               "pip install --user powerline-mem-segment",
               "Installing powerline mem segment"
+            ],
+            [
+              "pip install --user thefuck",
+              "Installing thefuck"
             ]
         ]
     }
