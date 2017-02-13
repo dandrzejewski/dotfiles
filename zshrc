@@ -92,3 +92,11 @@ PATH=$PATH:$HOME/.vimpkg/bin
 # Add support for thefuck
 eval "$(thefuck --alias)"
 
+
+
+# Add all keys to the agent
+ssh-add -A &> /dev/null
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/dave/.sdkman"
+
