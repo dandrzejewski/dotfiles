@@ -28,6 +28,10 @@ set nobackup
 
 " On-screen line numbering
 set number
+
+" Relative numbering
+set relativenumber
+
 set nuw=6
 
 " File Explorer (F2)
@@ -129,9 +133,9 @@ set nocompatible
 set t_Co=256
  
 let g:minBufExplForceSyntaxEnable = 1
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
+python3 from powerline.vim import setup as powerline_setup
+python3 powerline_setup()
+python3 del powerline_setup
  
 if ! has('gui_running')
    set ttimeoutlen=10
@@ -155,9 +159,11 @@ execute pathogen#infect()
 map <C-n> :NERDTreeToggle<CR>
 
 au BufNewFile,BufRead *.gradle setf groovy
+au BufNewFile,BufRead *.md set filetype=markdown
 
 " Remember the last position in a file.
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
+call pathogen#helptags()

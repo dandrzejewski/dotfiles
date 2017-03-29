@@ -22,12 +22,16 @@ fi
 
 if [ `uname` = "Darwin" ]; then
   export JAVA_HOME=$(/usr/libexec/java_home)
+  export DEVELOPER_DIR=/Applications/Xcode.app
+  export PATH=$PATH:$HOME/Library/Python/3.6/bin
 fi
 
 powerline-daemon -q
 
 if [[ -a $HOME/.local/lib/python2.7/site-packages/powerline ]]; then
 	export POWERLINE_LOC="$HOME/.local/lib/python2.7/site-packages/powerline"
+elif [[ -a $HOME/Library/Python/3.6/lib/python/site-packages/powerline ]]; then
+   export POWERLINE_LOC="$HOME/Library/Python/3.6/lib/python/site-packages/powerline"
 elif [[ -a $HOME/Library/Python/2.7/lib/python/site-packages/powerline ]]; then
     export POWERLINE_LOC="$HOME/Library/Python/2.7/lib/python/site-packages/powerline"
 elif [[ -a /usr/local/lib/python2.7/dist-packages/powerline ]]; then
@@ -72,8 +76,30 @@ export GREP_COLOR='1;35;40'
 ## History
 HISTFILE=$HOME/.zhistory       # enable history saving on shell exit
 setopt APPEND_HISTORY          # append rather than overwrite history file.
-HISTSIZE=1200                  # lines of history to maintain memory
-SAVEHIST=1000                  # lines of history to maintain in history file.
+HISTSIZE=10000                  # lines of history to maintain memory
+SAVEHIST=20000                  # lines of history to maintain in history file.
 setopt HIST_EXPIRE_DUPS_FIRST  # allow dups, but expire old ones when I hit HISTSIZE
 setopt EXTENDED_HISTORY        # save timestamp and runtime information
+#setopt SHARE_HISTORY         # This shares the history between different instances of zsh... not sure I like that.
+
+
+#PATH="/Users/dave/perl5/bin${PATH:+:${PATH}}"; export PATH;
+#PERL5LIB="/Users/dave/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+#PERL_LOCAL_LIB_ROOT="/Users/dave/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+#PERL_MB_OPT="--install_base \"/Users/dave/perl5\""; export PERL_MB_OPT;
+#PERL_MM_OPT="INSTALL_BASE=/Users/dave/perl5"; export PERL_MM_OPT;
+
+
+PATH=$PATH:$HOME/.vimpkg/bin
+
+# Add support for thefuck
+eval "$(thefuck --alias)"
+
+
+
+# Add all keys to the agent
+ssh-add -A &> /dev/null
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/dave/.sdkman"
 
