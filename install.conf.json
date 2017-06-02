@@ -9,7 +9,8 @@
             "~/.todo.cfg": "todo.cfg",
             "~/.config/powerline": "powerline",
             "~/.atom": "atom/",
-            "~/.todo.actions.d": "todo.actions.d/"
+            "~/.todo.actions.d": "todo.actions.d/",
+            "~/.zprezto": "prezto"
         }
     },
     {
