@@ -3,7 +3,7 @@
 	url = git@github.com:anishathalye/dotbot
 [submodule "tmux"]
 	path = tmux
-	url = git@github.com:dandrzejewski/dotfiles_tmux
+	url = git@github.com:dandrzejewski/dotfiles_tmux.git
 [submodule "prezto"]
 	path = prezto
 	url = git@github.com:dandrzejewski/prezto.git
