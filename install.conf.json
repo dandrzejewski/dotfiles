@@ -5,7 +5,7 @@
             "~/.tmux.conf": "tmux/.tmux.conf",
             "~/.tmux.conf.local": "tmux/.tmux.conf.local",
             "~/.vimrc": "vimrc",
-            "~/.zshrc": "prezto/runcoms/zshrc",
+            "~/.zshrc": "zshrc",
             "~/.zshenv": "prezto/runcoms/zshenv",
             "~/.zpreztorc": "zpreztorc",
             "~/.vim": "vim/",
