@@ -126,16 +126,11 @@ if &term == "screen" || &term == "xterm"
 endif
 
 
-set rtp+=/Users/dandrzejewski/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim
- 
 " These lines setup the environment to show graphics and colors correctly.
 set nocompatible
 set t_Co=256
  
 let g:minBufExplForceSyntaxEnable = 1
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
  
 if ! has('gui_running')
    set ttimeoutlen=10
@@ -167,3 +162,10 @@ if has("autocmd")
 endif
 
 call pathogen#helptags()
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'itchyny/lightline.vim'
+
+call plug#end()
+
