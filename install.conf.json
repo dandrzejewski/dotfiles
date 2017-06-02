@@ -5,7 +5,7 @@
             "~/.tmux.conf": "tmux/.tmux.conf",
             "~/.tmux.conf.local": "tmux/.tmux.conf.local",
             "~/.vimrc": "vimrc",
-            "~/.zshrc": "zshrc",
+            "~/.zshrc": "prezto/runcoms/zshrc",
             "~/.vim": "vim/",
             "~/.todo.cfg": "todo.cfg",
             "~/.config/powerline": "powerline",
@@ -17,16 +17,8 @@
     {
         "shell": [
             [
-              "pip3 install --user git+https://github.com/powerline/powerline",
-              "Installing powerline with pip3"
-            ],
-            [
                 "git submodule update --init --recursive",
                 "Installing submodules"
-            ],
-            [
-              "pip3 install --user powerline-mem-segment",
-              "Installing powerline mem segment"
             ],
             [
               "pip3 install --user thefuck",
