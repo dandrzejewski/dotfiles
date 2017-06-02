@@ -2,7 +2,8 @@
     {
         "link": {
             "~/.bash_profile": "bash_profile",
-            "~/.tmux.conf": "tmux.conf",
+            "~/.tmux.conf": "tmux/.tmux.conf",
+            "~/.tmux.conf.local": "tmux/.tmux.conf.local",
             "~/.vimrc": "vimrc",
             "~/.zshrc": "zshrc",
             "~/.vim": "vim/",

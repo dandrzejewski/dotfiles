@@ -133,9 +133,9 @@ set nocompatible
 set t_Co=256
  
 let g:minBufExplForceSyntaxEnable = 1
-python3 from powerline.vim import setup as powerline_setup
-python3 powerline_setup()
-python3 del powerline_setup
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
  
 if ! has('gui_running')
    set ttimeoutlen=10
