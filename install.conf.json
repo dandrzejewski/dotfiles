@@ -6,6 +6,7 @@
             "~/.tmux.conf.local": "tmux/.tmux.conf.local",
             "~/.vimrc": "vimrc",
             "~/.zshrc": "prezto/runcoms/zshrc",
+            "~/.zshenv": "prezto/runcoms/zshenv",
             "~/.vim": "vim/",
             "~/.todo.cfg": "todo.cfg",
             "~/.config/powerline": "powerline",
