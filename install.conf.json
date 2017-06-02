@@ -23,6 +23,10 @@
                 "Installing submodules"
             ],
             [
+              "install_zprezto.sh",
+              "Installing zprezto"
+            ],
+            [
               "pip3 install --user thefuck",
               "Installing thefuck"
             ]
