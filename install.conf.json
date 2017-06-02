@@ -7,6 +7,7 @@
             "~/.vimrc": "vimrc",
             "~/.zshrc": "prezto/runcoms/zshrc",
             "~/.zshenv": "prezto/runcoms/zshenv",
+            "~/.zpreztorc": "zpreztorc",
             "~/.vim": "vim/",
             "~/.todo.cfg": "todo.cfg",
             "~/.config/powerline": "powerline",
