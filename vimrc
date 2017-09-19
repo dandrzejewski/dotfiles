@@ -159,3 +159,10 @@ if has("autocmd")
 endif
 
 call pathogen#helptags()
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'itchyny/lightline.vim'
+
+call plug#end()
+
