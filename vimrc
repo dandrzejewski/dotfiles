@@ -163,6 +163,7 @@ call pathogen#helptags()
 call plug#begin('~/.vim/plugged')
 
 Plug 'itchyny/lightline.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 
 call plug#end()
 
