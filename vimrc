@@ -169,3 +169,8 @@ Plug 'itchyny/lightline.vim'
 
 call plug#end()
 
+let g:lightline = {
+  \ 'colorscheme': 'PaperColor_light',
+  \ }
+
+
