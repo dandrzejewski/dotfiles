@@ -131,7 +131,7 @@ set nocompatible
 set t_Co=256
  
 let g:minBufExplForceSyntaxEnable = 1
- 
+
 if ! has('gui_running')
    set ttimeoutlen=10
    augroup FastEscape
@@ -150,9 +150,6 @@ set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusl
 " Pathogen
 execute pathogen#infect()
 
-" NERDTree
-map <C-n> :NERDTreeToggle<CR>
-
 au BufNewFile,BufRead *.gradle setf groovy
 au BufNewFile,BufRead *.md set filetype=markdown
 
@@ -166,6 +163,7 @@ call pathogen#helptags()
 call plug#begin('~/.vim/plugged')
 
 Plug 'itchyny/lightline.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 
 call plug#end()
 
