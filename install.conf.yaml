@@ -17,7 +17,7 @@
     ~/.config/powerline: powerline
     ~/.atom: atom/
     ~/.todo.actions.d: todo.actions.d/
-    ~/.zprezto: prezto,
+    ~/.zprezto: prezto
     ~/.config/htop: htop/
 
 - shell:
