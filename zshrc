@@ -35,3 +35,6 @@ if [ -n "$DESKTOP_SESSION" ];then
     export SSH_AUTH_SOCK
 fi
 
+setopt no_share_history
+unsetopt share_history
+

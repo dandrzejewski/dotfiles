@@ -31,7 +31,8 @@ let g:indent_guides_enable_on_vim_startup = 1
 
 set nowrap
 syntax on
-set guifont=Courier_New:h8
+"set guifont=Courier_New:h8
+set guifont=JetBrains\ Mono\ Medium
 set showtabline=2
 
 filetype plugin indent on
@@ -172,7 +173,7 @@ if ! has('gui_running')
 endif
  
 set laststatus=2 " Always display the statusline in all windows
-set guifont=Inconsolata\ for\ Powerline:h14
+"set guifont=Inconsolata\ for\ Powerline:h14
 set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 
 " set statusline=%04n\ %t%(\ %m%r%y[%{&ff}][%{&fenc}]\ \ %{mode()}%)\ %a%=col\ %v\ \ line\ %l/%L\ %p%%                                                                                   
