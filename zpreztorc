@@ -46,6 +46,8 @@ zstyle ':prezto:load' pmodule \
   'syntax-highlighting' \
   'terminal' \
   'tmux' \
+  'prompt' \
+  'ssh' \
   'completion'
 
 #

@@ -37,4 +37,7 @@ fi
 
 setopt no_share_history
 unsetopt share_history
+export LC_ALL=en_US.UTF-8
+
+cd ~
 
