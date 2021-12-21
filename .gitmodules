@@ -1,6 +1,3 @@
-[submodule "dotbot"]
-	path = dotbot
-	url = git@github.com:anishathalye/dotbot
 [submodule "tmux"]
 	path = tmux
 	url = git@github.com:dandrzejewski/dotfiles_tmux.git
