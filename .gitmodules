@@ -4,9 +4,11 @@
 [submodule "Vundle.vim"]
 	path = Vundle.vim
 	url = https://github.com/VundleVim/Vundle.vim.git
+	ignore = dirty
 [submodule "vim/bundle/Vundle.vim"]
 	path = vim/bundle/Vundle.vim
 	url = https://github.com/VundleVim/Vundle.vim.git
+	ignore = dirty
 [submodule "dotfiles"]
 	branch = master
 [submodule "dotbot"]
@@ -16,3 +18,5 @@
 [submodule "prezto"]
 	path = prezto
 	url = git@github.com:sorin-ionescu/prezto.git
+	ignore = dirty
+
