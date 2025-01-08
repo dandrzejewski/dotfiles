@@ -16,12 +16,8 @@
     ~/.vimrc: vimrc
     ~/.zshrc: zshrc
     ~/.vim: vim/
-    ~/.todo.cfg: todo.cfg
-    ~/.config/powerline: powerline
-    ~/.atom: atom/
-    ~/.todo.actions.d: todo.actions.d/
     ~/.config/htop: htop/
-    ~/.oh-my-zsh: oh-my-zsh/
+    ~/.oh-my-zsh: ohmyzsh/
 
 - shell:
     - ["touch ~/.zshrc.local", "Creating empty .zshrc.local"]
