@@ -13,7 +13,7 @@
 	branch = master
 [submodule "dotbot"]
 	path = dotbot
-	url = https://github.com/anishathalye/dotbot
+	url = ssh://git@ssh.github.com:443/anishathalye/dotbot.git
 	ignore = all
 [submodule "prezto"]
 	path = prezto
