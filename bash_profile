@@ -28,3 +28,5 @@ export SDKMAN_DIR="/Users/dave/.sdkman"
 [[ -s "/Users/dave/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/dave/.sdkman/bin/sdkman-init.sh"
 
 export PATH="/Applications/HPE_Security/Fortify_SCA_and_Apps_17.10/bin:$PATH"
+export PATH=$PATH:/usr/local/go/bin
+
