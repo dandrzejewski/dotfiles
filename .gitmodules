@@ -20,3 +20,6 @@
 	url = git@github.com:sorin-ionescu/prezto.git
 	ignore = all
 
+[submodule "ohmyzsh"]
+	path = ohmyzsh
+	url = ssh://git@ssh.github.com:443/ohmyzsh/ohmyzsh.git

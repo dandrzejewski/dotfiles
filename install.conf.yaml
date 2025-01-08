@@ -1,10 +1,11 @@
+---
 - defaults:
     link:
       create: true
       relink: true
 
 - create:
-  - ~/.config
+    - ~/.config
 
 - clean: ['~']
 
@@ -20,9 +21,8 @@
     ~/.atom: atom/
     ~/.todo.actions.d: todo.actions.d/
     ~/.config/htop: htop/
+    ~/.oh-my-zsh: oh-my-zsh/
 
 - shell:
     - ["touch ~/.zshrc.local", "Creating empty .zshrc.local"]
     - ["git submodule update --init --recursive", "Installing submodules"]
-    - ["pip3 install --user thefuck", "Installing thefuck"]
-
