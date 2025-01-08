@@ -111,3 +111,5 @@ source $ZSH/oh-my-zsh.sh
 
 PROMPT='$(kube_ps1)'$PROMPT
 
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"

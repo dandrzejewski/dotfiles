@@ -22,3 +22,5 @@
 - shell:
     - ["touch ~/.zshrc.local", "Creating empty .zshrc.local"]
     - ["git submodule update --init --recursive", "Installing submodules"]
+    - ["/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"", "Installing homebrew"]
+
