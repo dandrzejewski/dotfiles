@@ -75,6 +75,9 @@ plugins=(
   kube-ps1
 )
 
+# Theme must go before sourcing oh-my-zsh
+ZSH_THEME=agnoster
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
