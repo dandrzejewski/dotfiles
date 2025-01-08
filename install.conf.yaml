@@ -14,19 +14,15 @@
     ~/.tmux.conf.local: tmux/.tmux.conf.local
     ~/.vimrc: vimrc
     ~/.zshrc: zshrc
-    ~/.zshenv: prezto/runcoms/zshenv
-    ~/.zpreztorc: zpreztorc
     ~/.vim: vim/
     ~/.todo.cfg: todo.cfg
     ~/.config/powerline: powerline
     ~/.atom: atom/
     ~/.todo.actions.d: todo.actions.d/
-    ~/.zprezto: prezto
     ~/.config/htop: htop/
 
 - shell:
     - ["touch ~/.zshrc.local", "Creating empty .zshrc.local"]
     - ["git submodule update --init --recursive", "Installing submodules"]
-    - ["install_zprezto.sh", "Installing zprezto"]
     - ["pip3 install --user thefuck", "Installing thefuck"]
 
