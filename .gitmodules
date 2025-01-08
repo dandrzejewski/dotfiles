@@ -13,8 +13,9 @@
 	branch = master
 [submodule "dotbot"]
 	path = dotbot
-	url = ssh://git@ssh.github.com:443/anishathalye/dotbot.git
-	ignore = all
+	url = https://github.com/anishathalye/dotbot
+	ignore = dirty
+	tag = v1.21.0
 [submodule "prezto"]
 	path = prezto
 	url = git@github.com:sorin-ionescu/prezto.git
