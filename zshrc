@@ -110,6 +110,12 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 PROMPT='$(kube_ps1)'$PROMPT
+alias k=kubectl
+
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+. ~/.zshrc.local
+
